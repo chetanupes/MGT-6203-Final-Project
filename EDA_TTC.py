@@ -33,7 +33,7 @@ from ipywidgets import interactive
 from PIL import Image
 
 #Model libraries
-from pandas_profiling import ProfileReport
+#from pandas_profiling import ProfileReport
 from sklearn.metrics import mean_squared_error,r2_score
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import RepeatedKFold
