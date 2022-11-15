@@ -239,8 +239,8 @@ result=np.round(pred_xg1,2)
 #Prediction
 st.title('Prediction')
 
-st.write('The min delay predicted based on the user selection in minutes is:') 
-result
+st.write('The min delay predicted based on the user selection in minutes is:', result) 
+
 
 #References
 st.title('References')
