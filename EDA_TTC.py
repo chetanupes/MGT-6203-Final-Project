@@ -234,7 +234,7 @@ pred=pred.drop(['Day','Station','Code Group','Season','Time_New'], axis=1)
 
 #Prediction on test
 pred_xg1=xg_model.predict(pred)
-result=np.round(pred_xg1,2)
+result=np.round(int(pred_xg1))
 ###############################################################################################################################################
 #Prediction
 st.title('Prediction')
