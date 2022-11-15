@@ -54,7 +54,7 @@ st.write('2. Meaghan Wright')
 st.write('3. Chetan Tewari')
 
 st.title('Problem Statement')
-st.write('The object of this study is three-fold')
+st.write('The object of this study is three-fold:')
 st.write('1. What can we learn about delays?' )
 st.write('2. Can we predict them?')
 st.write('3. Can we prevent them?')
@@ -281,7 +281,7 @@ result=np.round(pred_xg1,2)
 #Prediction
 st.title('Prediction')
 
-st.write('The min delay predicted based on the user selection is:') 
+st.write('The min delay predicted based on the user selection in minutes is:') 
 result
 
 #References
