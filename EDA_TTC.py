@@ -239,7 +239,7 @@ result=np.round(int(pred_xg1))
 #Prediction
 st.title('Prediction')
 
-st.write('The min delay predicted based on the user selection in minutes is:', result) 
+st.write('The minimum delay predicted based on the user selection in minutes is:', result) 
 
 
 #References
