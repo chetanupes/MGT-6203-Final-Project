@@ -4,6 +4,7 @@ from IPython.core.display import Image
 import pandas as pd
 import numpy as np
 from jinja2 import escape
+import joblib
 
 #Streamlit
 import streamlit as st
@@ -193,51 +194,8 @@ season=df_data['Season'].unique()[:-1]
 time=df_data['Time_New'].unique()[:-1]
 day=df_data['Day'].unique()[:-1]
 
-for i in station:
-    df_data['Station_{}'.format(i)]=np.where(df_data['Station']==i, 1, 0)
-df1=copy.deepcopy(df_data)
-
-for i in day:
-    df1['Day_{}'.format(i)]=np.where(df1['Day']==i, 1, 0)
-df2=copy.deepcopy(df1)
-
-for i in season:
-    df2['Season_{}'.format(i)]=np.where(df2['Season']==i, 1, 0)
-df3=copy.deepcopy(df2)
-
-for i in code_group:
-    df3['Code Group_{}'.format(i)]=np.where(df3['Code Group']==i, 1, 0)
-df4=copy.deepcopy(df3)
-
-for i in time:
-    df4['Time_New_{}'.format(i)]=np.where(df4['Time_New']==i, 1, 0)
-
-df_final=copy.deepcopy(df4)
-df_final=df_final.drop(columns=['Day','Station','Code Group','Season','Time_New'])
-
-#Splitting the data into test train
-from sklearn.model_selection import train_test_split
-X=df_final.iloc[:,1:]
-y=df_final.iloc[:,0]
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=24)
-
-df_train=pd.concat([y_train,X_train], axis=1).reset_index(drop=True)
-df_test=pd.concat([y_test,X_test], axis=1).reset_index(drop=True)
-
-
-# Model 
-
-X1=df_train.iloc[:,1:]
-y1=df_train.iloc[:,0]
-
-#Random forest
-rf = RandomForestRegressor()
-rf.fit(X1,y1)
- 
-# Instantiation
-xgb_r = xg.XGBRegressor(n_estimators = 10, seed = 123)
-xgb_r.fit(X1,y1)
+#Loading the model
+xg_model = joblib.load('XG.sav')
 
 # Prediction
 # Selecting the method for analysis   
@@ -275,7 +233,7 @@ pred=copy.deepcopy(df_4)
 pred=pred.drop(['Day','Station','Code Group','Season','Time_New'], axis=1)
 
 #Prediction on test
-pred_xg1=xgb_r.predict(pred)
+pred_xg1=xg_model.predict(pred)
 result=np.round(pred_xg1,2)
 ###############################################################################################################################################
 #Prediction
